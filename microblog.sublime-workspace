@@ -1,0 +1,515 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"log",
+				"logged_in"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "/home/hank/code/TODO.txt",
+			"settings":
+			{
+				"buffer_size": 555,
+				"line_ending": "Unix",
+				"name": "TODO.txt"
+			}
+		},
+		{
+			"file": "/home/hank/code/knowlog.txt",
+			"settings":
+			{
+				"buffer_size": 1475,
+				"line_ending": "Unix",
+				"name": "Learning JS"
+			}
+		},
+		{
+			"file": "app/views.py",
+			"settings":
+			{
+				"buffer_size": 975,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/__init__.py",
+			"settings":
+			{
+				"buffer_size": 115,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/forms.py",
+			"settings":
+			{
+				"buffer_size": 263,
+				"line_ending": "Unix",
+				"name": "from flask.ext.wtf import Form"
+			}
+		},
+		{
+			"file": "app/templates/login.html",
+			"settings":
+			{
+				"buffer_size": 1291,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/templates/start.html",
+			"settings":
+			{
+				"buffer_size": 553,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/templates/index.html",
+			"settings":
+			{
+				"buffer_size": 234,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "config.py",
+			"settings":
+			{
+				"buffer_size": 394,
+				"line_ending": "Unix",
+				"name": "WTF_CSRF_ENABLED = True"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"tim",
+				"Snippet: Lorem ipsum"
+			],
+			[
+				"sy py",
+				"Set Syntax: Python"
+			],
+			[
+				"ssh",
+				"Set Syntax: HTML"
+			]
+		],
+		"width": 392.0
+	},
+	"console":
+	{
+		"height": 0.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/hank/code/flask/punch-card/schema.sql",
+		"/home/hank/code/flask/punch-card/templates/layout.html",
+		"/home/hank/code/flask/punch-card/static/style.css",
+		"/home/hank/code/flask/punch-card/templates/show_entries.html",
+		"/home/hank/code/flask/punch-card/punchcard.py",
+		"/home/hank/code/flask/punch-card/punch.sublime-project",
+		"/home/hank/Documents/LA to PDX",
+		"/home/hank/code/flask/punch-card/.git/MERGE_MSG",
+		"/home/hank/code/flask/tagger/tagger.py",
+		"/home/hank/code/flask/tagger/templates/layout.html",
+		"/home/hank/code/flask/tagger/templates/show_entries.html",
+		"/home/hank/code/flask/tagger/templates/login.html",
+		"/home/hank/code/flask/tagger/static/style.css",
+		"/home/hank/code/html/portfolio/index.html",
+		"/home/hank/code/html/portfolio/TTT.html",
+		"/home/hank/code/html/portfolio/2048.html",
+		"/home/hank/code/py/google-python-exercises/basic/wordcount.py",
+		"/home/hank/Documents/TWBC/[Bidness Plan Shiz].txt",
+		"/etc/apt/sources.lst",
+		"/home/hank/Desktop/sources.list",
+		"/home/hank/sound-rig/portmidi/pm_python/setup.py",
+		"/home/hank/.profile",
+		"/home/hank/radio/exam notes.txt",
+		"/home/hank/Documents/Leisure Angeles.txt",
+		"/home/hank/Documents/TWBC/doo job description.txt",
+		"/home/hank/.bash_profile",
+		"/home/hank/.bash_rc",
+		"/home/hank/.config/sublime-text-2/Packages/Default/Preferences.sublime-settings",
+		"/home/hank/.config/sublime-text-2/Packages/User/Preferences.sublime-settings",
+		"/home/hank/.config/sublime-text-2/Packages/User/Plain text.sublime-settings",
+		"/home/hank/code/html/bootstrap/bootstrap-prestructure.html",
+		"/home/hank/code/html/portfolio/css/styles.css",
+		"/home/hank/code/html/portfolio/toplist/index.html",
+		"/home/hank/code/html/portfolio/css/bootstrap.css",
+		"/home/hank/code/html/portfolio/toplist/style.css",
+		"/home/hank/code/html/portfolio/framework/css/main.css",
+		"/home/hank/code/html/portfolio/framework/test.html"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"in_time",
+			"Appify",
+			".",
+			"	        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>",
+			"modal",
+			"col-md-6"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"	        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>",
+			"col-md-4 col-md-offset-2"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/home/hank/code/TODO.txt",
+					"settings":
+					{
+						"buffer_size": 555,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								477,
+								477
+							]
+						],
+						"settings":
+						{
+							"auto_name": "TODO.txt",
+							"syntax": "Packages/Java/Java.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/home/hank/code/knowlog.txt",
+					"settings":
+					{
+						"buffer_size": 1475,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1475,
+								1475
+							]
+						],
+						"settings":
+						{
+							"auto_name": "Learning JS",
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 102.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/views.py",
+					"settings":
+					{
+						"buffer_size": 975,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								973,
+								973
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "app/__init__.py",
+					"settings":
+					{
+						"buffer_size": 115,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								80,
+								80
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "app/forms.py",
+					"settings":
+					{
+						"buffer_size": 263,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								263,
+								263
+							]
+						],
+						"settings":
+						{
+							"auto_name": "from flask.ext.wtf import Form",
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "app/templates/login.html",
+					"settings":
+					{
+						"buffer_size": 1291,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								980,
+								980
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "app/templates/start.html",
+					"settings":
+					{
+						"buffer_size": 553,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								337,
+								337
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "app/templates/index.html",
+					"settings":
+					{
+						"buffer_size": 234,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								75,
+								75
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "config.py",
+					"settings":
+					{
+						"buffer_size": 394,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								394,
+								394
+							]
+						],
+						"settings":
+						{
+							"auto_name": "WTF_CSRF_ENABLED = True",
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 34.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true
+}
