@@ -1,1 +1,2 @@
-#Lance's version of Miguel's Microblog, as seen in the Flase Mega-Tutorial
+#Miguel's Microblog
+Lance's version of the microblog as seen in the Flask Mega-Tutorial
