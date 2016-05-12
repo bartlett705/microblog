@@ -1,0 +1,27 @@
+<!-- extend base layout -->
+{% extends "start.html" %}
+
+{% block content %}
+  <table>
+      <tr valign="top">
+          <td><img src="{{ user.avatar(128) }}"></td>
+          <td><font size=5>The ramblings of <strong>{{ user.handle }}</strong></font>
+          {% if user.last_seen %}<font size=3>, who was last seen on {{ user.last_seen }}, are seen by {{ user.followers.count() }} hapless souls and/or bots.</font>{% endif %}
+          {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}<br>
+          {% if user.id == g.user.id %}<a href="{{ url_for('edit') }}">Fix this stuff</a>
+          {% elif g.user.is_following(user) %}
+            <a href="{{ url_for('unfollow', handle=user.handle) }}">Unfollow</a>
+          {% else %}
+			<a href="{{ url_for('follow', handle=user.handle) }}">Follow</a>
+          {% endif %}</td>
+      </tr>
+  </table>
+
+  	<hr>
+	{% if posts.has_prev %}<a href="{{ url_for('index', page=posts.prev_num) }}">&lt;&lt; Futureways</a>{% else %}&lt;&lt; Futureways{% endif %} | 
+	{% if posts.has_next %}<a href="{{ url_for('index', page=posts.next_num) }}">Pastwise &gt;&gt;</a>{% else %}Pastwise &gt;&gt;{% endif %}
+  
+	{% for post in posts.items %}
+ 		{% include 'post.html' %}
+	{% endfor %}
+{% endblock %}

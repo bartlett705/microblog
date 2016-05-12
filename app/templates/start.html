@@ -1,14 +1,29 @@
 <!doctype HTML>
 <html>
   <head>
-    {% if title %}
-    <title> {{ title }} - miniblog </title>
-    {% else %}
     <title>Welcome to Stance Industries</title>
-    {% endif %}
   </head>
   <body>
-     <div>Microblog: <a href="/index">Home</a></div>
+     <div>
+     <table>
+     <tr>
+     <td>
+     Microblog: <a href="/index">Home</a>
+     </td>
+     <td width=90%>&nbsp;
+
+     </td>
+     <td>
+        {% if g.user.is_authenticated %}
+          <a href="{{ url_for('user', handle=g.user.handle, page=1) }}"><img src="{{ user.avatar(32) }}"></a>
+          <a href="{{ url_for('logout') }}">Logout</a>
+        {% else %}
+          <a href="{{ url_for('login') }}">Login</a>
+        {% endif %}
+     </td>
+     <tr>
+     </table>
+     </div>
      <hr>
      {% with messages = get_flashed_messages() %}
       {% if messages %}

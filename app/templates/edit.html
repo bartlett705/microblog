@@ -1,0 +1,27 @@
+<!-- extend base layout -->
+{% extends "start.html" %}
+
+{% block content %}
+  <h1>Set the record straight</h1>
+  <form action="" method="post" name="edit">
+      {{form.hidden_tag()}}
+      <table>
+          <tr>
+              <td>Your handle:</td>
+              <td>{{ form.handle(size=24) }}
+              {% for error in form.errors.nickname %}
+                <br><span style="color: red;">[{{ error }}]</span>
+              {% endfor %}
+            </td>
+          </tr>
+          <tr>
+              <td>Spill the beans:</td>
+              <td>{{ form.about_me(cols=32, rows=4) }}</td>
+          </tr>
+          <tr>
+              <td></td>
+              <td><input type="submit" value="Commit"></td>
+          </tr>
+      </table>
+  </form>
+{% endblock %}

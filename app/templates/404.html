@@ -1,0 +1,9 @@
+<!-- extend base layout -->
+{% extends "start.html" %}
+
+{% block content %}
+  <h1>Ah, crud! I can't find that file.</h1>
+  <img src="http://placekitten.com/149/151" class = "img-rounded img-responsive center-block">
+  <h3>Here's a kitty, though!</h3>
+  <p><a href="{{ url_for('index') }}">Back</a></p>
+{% endblock %}

@@ -1,7 +1,21 @@
 {% extends "start.html" %}
 {% block content %}
-    <h1>Salutations, {{ user.handle }}!</h1>
-    {% for post in posts %}
-      <div><p>{{ post.author.handle }} says: <b>{{ post.body }}</b></p></div>
+	{% if user.handle %}
+    	<h1>Salutations, {{ user.handle }}!</h1>
+    {% else %}
+    	<h1>Howdy, stranger!</h1>
+    {% endif %}
+    <form action="" method="post" name="post">
+    	{{form.hidden_tag()}}
+    	<h4>Type Away: {{ form.post(size=60, maxlength=240) }}</h4>
+    	{% for error in form.post.errors %}
+    	<span style="color:red;">[ {{ error }} !!! ]</span><br>
+    	{% endfor %}
+    	<input type="submit" value="Commit">
+    </form>
+    {% if posts.has_prev %}<a href="{{ url_for('index', page=posts.prev_num) }}">&lt;&lt; Futureways</a>{% else %}&lt;&lt; Futureways{% endif %} | 
+	{% if posts.has_next %}<a href="{{ url_for('index', page=posts.next_num) }}">Pastwise &gt;&gt;</a>{% else %}Pastwise &gt;&gt;{% endif %}
+    {% for post in posts.items %}
+     {% include 'post.html' %}
     {% endfor %}
 {% endblock %}

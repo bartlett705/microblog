@@ -2,33 +2,8 @@
 {% extends "start.html" %}
 
 {% block content %}
-<script type="text/javascript">
-function set_openid(openid, pr)
-{
-    u = openid.search('<username>')
-    if (u != -1) {
-        // openid requires username
-        user = prompt('Enter your ' + pr + ' username:')
-        openid = openid.substr(0, u) + user
-    }
-    form = document.forms['login'];
-    form.elements['openid'].value = openid
-}
-</script>
   <h1>Credentials</h1>
-  <form action="" method="post" name="login">
-      {{ form.hidden_tag() }} <!-- for the CRSF protections -->
-      <p>
-          Give us a URI to look up your internet papers (ie Google profile, other options <a href="http://openid.net/get-an-openid/">here</a> :<br>
-          {{ form.openid(size=80) }}<br> <!-- the form class knows how to make the proper HTML -->
-          {% for error in form.openid.errors %}
-            <span style="color: red;">[{{ error }}]</span>  <!-- Make this pretty -->
-          {% endfor %}<br>
-          {% for pr in providers %}
-          <a href="javascript:set_openid('{{ pr.url }}', '{{ pr.name }}');">{{ pr.name }}</a> |
-        {% endfor %}
-      </p>
-      <p>{{ form.remember_me }} Don't put me through this again (cuz cookie)</p>
-      <p><input type="submit" value="Validate"></p>
-  </form>
+  <a href="/authorize/facebook">Facebook</a><br>
+  <a href="/authorize/twitter">Twitter</a><br>
+
 {% endblock %}
