@@ -1,8 +1,9 @@
-from app import db
+from app import app, db
 from config import MAX_POST_LENGTH
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import UserMixin
 from hashlib import md5
+import flask.ext.whooshalchemy as whooshalchemy
 
 
 followers = db.Table('followers',
@@ -81,51 +82,4 @@ class Post(db.Model):
  	def __repr__(self):
  		return '<post %r>' % (self.body)
 
-
-# class OAuthSignIn(object):
-#     providers = None
-
-#     def __init__(self, provider_name):
-#         self.provider_name = provider_name
-#         credentials = app.config['OAUTH_CREDENTIALS'][provider_name]
-#         self.consumer_id = credentials['id']
-#         self.consumer_secret = credentials['secret']
-
-#     def authorize(self):
-#         pass
-
-#     def callback(self):
-#         pass
-
-#     def get_callback_url(self):
-#         return url_for('oauth_callback', provider=self.provider_name,
-#                        _external=True)
-
-#     @classmethod
-#     def get_provider(self, provider_name):
-#         if self.providers is None:
-#             self.providers = {}
-#             for provider_class in self.__subclasses__():
-#                 provider = provider_class()
-#                 self.providers[provider.provider_name] = provider
-#         return self.providers[provider_name]
-
-# class TwitterSignIn(OAuthSignIn):
-#     def __init__(self):
-#         super(TwitterSignIn, self).__init__('twitter')
-#         auther = OAuth()
-#         self.service = auther.remote_app('twitter', base_url='https://api.twitter.com/1/', request_token_url='https://api.twitter.com/oauth/request_token', access_token_url='https://api.twitter.com/oauth/access_token', authorize_url='https://api.twitter.com/oauth/authorize', consumer_key=self.consumer_id, consumer_secret=self.consumer_secret)
-
-# 	def authorize(self):
-# 		return self.service.authorize(callback=url_for('oauth_callback', next=request.args.get('next') or request.referrer or None))
-
-#     def callback(self):
-#     	resp = self.service.authorized_response()
-#         social_id = 'twitter$' + str(resp.get('id'))
-#         username = resp.get('screen_name')
-#         session['twitter_token'] = (resp['oauth_token'], resp['oauth_token_secret'])
-#     	flash('You were signed in as %s' % resp['screen_name'])
-#         return social_id, username, None   # Twitter does not provide email
-
-# 	def get_twitter_token(token=None):
-# 	    	return session.get('twitter_token')
+whooshalchemy.whoosh_index(app, Post)

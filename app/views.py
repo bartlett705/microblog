@@ -2,7 +2,7 @@
 from datetime import datetime
 from random import choice
 from flask import render_template, flash, redirect, url_for, request, session, g
-from forms import EditForm, PostForm
+from forms import EditForm, PostForm, SearchForm
 from app import app, db, lm
 from models import User, Post
 from flask_oauthlib.client import OAuth
@@ -41,6 +41,20 @@ def index(page=1):
     posts = g.user.followed_posts().paginate(page, app.config['POSTS_PER_PAGE'], False)
     return render_template('index.html', title='Home', user=g.user, form=form, posts=posts, max_post_length=app.config['MAX_POST_LENGTH'])
 
+@app.route('/search', methods=['POST'])
+@login_required
+def search():
+    if not g.search_form.validate_on_submit():
+        return redirect(url_for('index'))
+    return redirect(url_for('search_results', query=g.search_form.search.data))
+
+@app.route('/search_results/<query>')
+@login_required
+def search_results(query):
+    results = Post.query.whoosh_search(query, app.config['MAX_SEARCH_RESULTS']).all()
+    return render_template("search_results.html", user=g.user, query=query, results=results)
+
+
 @app.before_request
 def before_request():
     g.user = current_user
@@ -48,6 +62,7 @@ def before_request():
         g.user.last_seen = datetime.utcnow()
         db.session.add(g.user)
         db.session.commit()
+        g.search_form = SearchForm()
 
 @app.route('/login')
 def login():

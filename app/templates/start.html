@@ -10,11 +10,13 @@
      <td>
      Microblog: <a href="/index">Home</a>
      </td>
-     <td width=90%>&nbsp;
-
+     <td width=90%>
+          {% if g.user.is_authenticated %}
+    <form style="display: inline;" action="{{ url_for('search') }}" method="post" name="search">{{ g.search_form.hidden_tag() }}{{ g.search_form.search(size=20) }}<input type="submit" value="Delve"></form>
+          {% endif %}
      </td>
      <td>
-        {% if g.user.is_authenticated %}
+          {% if g.user.is_authenticated %}
           <a href="{{ url_for('user', handle=g.user.handle, page=1) }}"><img src="{{ user.avatar(32) }}"></a>
           <a href="{{ url_for('logout') }}">Logout</a>
         {% else %}
