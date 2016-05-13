@@ -39,7 +39,7 @@ def index(page=1):
         flash(choice(app.config['MSG']['confirm_post']))
         return redirect(url_for('index'))
     posts = g.user.followed_posts().paginate(page, app.config['POSTS_PER_PAGE'], False)
-    return render_template('index.html', title='Home', user=g.user, form=form, posts=posts)
+    return render_template('index.html', title='Home', user=g.user, form=form, posts=posts, max_post_length=app.config['MAX_POST_LENGTH'])
 
 @app.before_request
 def before_request():
@@ -51,7 +51,11 @@ def before_request():
 
 @app.route('/login')
 def login():
-    return render_template('login.html',
+    if current_user.is_authenticated:
+        flash('You\'re already logged in, silly!')
+        return redirect(url_for('index'))
+    else:
+        return render_template('login.html',
                            title='Validate Credentials')
 
 @app.route('/authorize/facebook')
@@ -65,22 +69,18 @@ def oauth_authorize_fb():
 def oauth_callback_fb(resp):
     if not current_user.is_anonymous:
         return redirect(url_for('index'))
-    next_url = request.args.get('next') or url_for('index')
-#   resp = fb_oauth.authorized_response()
     session['facebook_token'] = (resp['access_token'], '')
-    data = fb_oauth.get('/me').data
+    data = fb_oauth.get('/me?fields=name,email').data
     print data
     social_id = '$facebook:' + data['id']
-    print social_id
     handle = data['name']
-    print handle
     if 'email' in data:
         email = data['email']
     else:
-        email = 'this_is@broken'
+        email = 'insufficient_permission'
     if social_id is None:
         flash(choice(app.config['MSG']['error']))
-        return redirect(next_url)
+        return redirect(request.args.get('next') or url_for('index'))
     user = User.query.filter_by(social_id=social_id).first()
     flash(choice(app.config['MSG']['hello']) % handle)
     if not user:
