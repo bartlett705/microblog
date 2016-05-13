@@ -1,0 +1,9 @@
+{% extends "start.html" %}
+
+{% block content %}
+  <h1>Your Query "{{ query }}"...</h1>
+  <h4>...turned up these posts:</h4>
+  {% for post in results %}
+      {% include 'post.html' %}
+  {% endfor %}
+{% endblock %}
