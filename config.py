@@ -20,8 +20,12 @@ OAUTH_CREDENTIALS = {
     }
 }
 
-# pagination constant
+#full-text search database
+WHOOSH_BASE = os.path.join(basedir, 'search.db')
+
+# Knobby constants
 POSTS_PER_PAGE = 3
+MAX_POST_LENGTH = 160
 
 # mail server settings
 MAIL_SERVER = 'localhost'

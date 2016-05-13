@@ -7,7 +7,7 @@
     {% endif %}
     <form action="" method="post" name="post">
     	{{form.hidden_tag()}}
-    	<h4>Type Away: {{ form.post(size=60, maxlength=240) }}</h4>
+    	<h4>Type Away: {{ form.post(size=60, maxlength=max_post_length) }}</h4>
     	{% for error in form.post.errors %}
     	<span style="color:red;">[ {{ error }} !!! ]</span><br>
     	{% endfor %}
