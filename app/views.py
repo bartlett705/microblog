@@ -22,9 +22,22 @@ fb_oauth = oauth.remote_app('facebook',
         consumer_secret=app.config['OAUTH_CREDENTIALS']['facebook']['secret'],
         request_token_params={'scope': 'email'})
 
+tw_oauth = oauth.remote_app('twitter',
+    base_url='https://api.twitter.com/1/',
+    request_token_url='https://api.twitter.com/oauth/request_token',
+    access_token_url='https://api.twitter.com/oauth/access_token',
+    authorize_url='https://api.twitter.com/oauth/authorize',
+    consumer_key=app.config['OAUTH_CREDENTIALS']['twitter']['id'],
+    consumer_secret=app.config['OAUTH_CREDENTIALS']['twitter']['secret']
+)
+
 @fb_oauth.tokengetter
 def get_facebook_token():
     return session.get('facebook_token')
+
+@tw_oauth.tokengetter
+def get_twitter_token(token=None):
+    return session.get('twitter_token')
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
@@ -84,6 +97,10 @@ def oauth_authorize_fb():
 def oauth_callback_fb(resp):
     if not current_user.is_anonymous:
         return redirect(url_for('index'))
+    next_url = request.args.get('next') or url_for('index')
+    if resp is None:
+        flash('It looks like you said no.')
+        return redirect(next_url)
     session['facebook_token'] = (resp['access_token'], '')
     data = fb_oauth.get('/me?fields=name,email').data
     print data
@@ -93,6 +110,36 @@ def oauth_callback_fb(resp):
         email = data['email']
     else:
         email = 'insufficient_permission'
+    validate_user(social_id, handle, email)
+    return redirect(request.args.get('next') or url_for('index'))
+
+@app.route('/authorize/twitter')
+def oauth_authorize_tw():
+    if not current_user.is_anonymous:
+        return redirect(url_for('index'))
+    return tw_oauth.authorize(callback=url_for('oauth_callback_tw', next=request.args.get('next') or request.referrer or None))
+
+@app.route('/callback/twitter')
+@tw_oauth.authorized_handler
+def oauth_callback_tw(resp):
+    if not current_user.is_anonymous:
+        return redirect(url_for('index'))
+    next_url = request.args.get('next') or url_for('index')
+    if resp is None:
+        flash('Looks like you said no.')
+        return redirect(next_url)
+    session['twitter_token'] = (
+        resp['oauth_token'],
+        resp['oauth_token_secret']
+    )
+    print resp
+    handle = resp['screen_name']
+    social_id = '$twitter:' + resp['user_id']
+    email = 'twitter user'
+    validate_user(social_id, handle, email)
+    return redirect(request.args.get('next') or url_for('index'))
+
+def validate_user(social_id, handle, email):
     if social_id is None:
         flash(choice(app.config['MSG']['error']))
         return redirect(request.args.get('next') or url_for('index'))
@@ -102,14 +149,14 @@ def oauth_callback_fb(resp):
         user = User(social_id=social_id, handle=handle, email=email)
         db.session.add(user)
         db.session.commit()
-        for ninny in (User.query.all()):
+        for ninny in (User.query.all()): #New users start out following everyone, and get auto-followed by existing users.
             db.session.add(user.follow(ninny))
             ninny.follow(user)
             db.session.add(ninny)
             db.session.commit()
         flash('Welcome to the party!')
     login_user(user, True)
-    return redirect(request.args.get('next') or url_for('index'))
+
 
 @app.route('/logout')
 def logout():
@@ -139,11 +186,13 @@ def edit():
         db.session.add(g.user)
         db.session.commit()
         flash(choice(app.config['MSG']['confirm_post']))
-        return redirect(url_for('edit'))
+        return redirect(url_for('user', handle=g.user.handle, page=1))
     else:
         form.handle.data = g.user.handle
         form.about_me.data = g.user.about_me
-    return render_template('edit.html', form=form)
+        if form.handle.errors:
+            flash(form.handle.errors[0])
+    return render_template('edit.html', form=form, user=g.user)
 
 @app.route('/follow/<handle>')
 @login_required
@@ -173,21 +222,21 @@ def unfollow(handle):
         return redirect(url_for('index'))
     if user == g.user:
         flash('Yeah, right. If you learn how to un-follow yourself, let me know!')
-        return redirect(url_for('user', handle=handle))
+        return redirect(url_for('user', handle=handle, page=1))
     u = g.user.unfollow(user)
     if u is None:
         flash('That\'s weird, you can\'t unfollow ' + handle + '.')
-        return redirect(url_for('user', handle=handle))
+        return redirect(url_for('user', handle=handle, page=1))
     db.session.add(u)
     db.session.commit()
-    flash('You have  ' + handle + '.')
-    return redirect(url_for('user', handle=handle))
+    flash('You have unfollowed ' + handle + '.')
+    return redirect(url_for('user', handle=handle, page=1))
 
 @app.errorhandler(404)
 def not_found_error(error):
-    return render_template('404.html'), 404
+    return render_template('404.html', user=g.user), 404
 
 @app.errorhandler(500)
 def internal_error(error):
     db.session.rollback()
-    return render_template('500.html'), 500
+    return render_template('500.html', user=g.user), 500

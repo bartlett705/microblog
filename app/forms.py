@@ -11,12 +11,12 @@ class EditForm(Form):
     	Form.__init__(self, *args, **kwargs)
     	self.original_handle = original_handle
 
-	def validate(self):
-		if not Form.validate(self):
-			return False
-		if self.handle.data == self.original_handle:
-			return True
-		user = User.query.filter_by(handle=self.handle.data).first()
+    def validate(self):
+        if not Form.validate(self):
+            return False
+        if self.handle.data == self.original_handle:
+            return True
+        user = User.query.filter_by(handle=self.handle.data).first()
         if user != None:
             self.handle.errors.append('Somebody already has that handle; choose another.')
             return False
