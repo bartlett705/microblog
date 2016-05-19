@@ -20,6 +20,7 @@ class User(UserMixin, db.Model):
 	posts = db.relationship('Post', backref='author', lazy='dynamic') # backref creates an 'author' field in the post entries based on the linked user.id
 	about_me = db.Column(db.String(260))
 	last_seen = db.Column(db.DateTime)
+	pic_url = db.Column(db.String(160))
 	followed = db.relationship('User',
 		secondary=followers,
 		primaryjoin=(followers.c.follower_id == id),
@@ -44,7 +45,10 @@ class User(UserMixin, db.Model):
 		return Post.query.join(followers, (followers.c.followed_id == Post.user_id)).filter(followers.c.follower_id == self.id).order_by(Post.timestamp.desc())
 	
 	def avatar(self, size):
-		return 'http://www.gravatar.com/avatar/%s?d=mm&s=%d' % (md5(self.email.encode('utf-8')).hexdigest(), size)
+		if "$google" in self.social_id:
+			return self.pic_url
+		else:
+			return 'http://www.gravatar.com/avatar/%s?d=mm&s=%d' % (md5(self.email.encode('utf-8')).hexdigest(), size)
 
 	@staticmethod # handle nickname collisions by adding an int to make it unique
 	def make_unique_handle(handle):

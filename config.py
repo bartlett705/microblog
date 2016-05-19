@@ -17,6 +17,10 @@ OAUTH_CREDENTIALS = {
     'twitter': {
         'id': 'DjM3gJz0mfQ8HlywtRF8ZMmuD',
         'secret': '7IU007EloPTkfH0Lp6KPCV9BBNF1ckJePLiUsAdYTk2FJmzoQi'
+    },
+    'google' : {
+    	'id' : "1068895437155-9qti0j2ft7kvhp5k5mrpvo69mlsk6mcm.apps.googleusercontent.com",
+    	'secret' : "egKHqytF1dPVKlvVlL5jGoW5"
     }
 }
 

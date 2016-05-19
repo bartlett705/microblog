@@ -1,6 +1,7 @@
 # define views
 from datetime import datetime
 from random import choice
+from json import loads
 from flask import render_template, flash, redirect, url_for, request, session, g
 from forms import EditForm, PostForm, SearchForm
 from app import app, db, lm
@@ -31,6 +32,17 @@ tw_oauth = oauth.remote_app('twitter',
     consumer_secret=app.config['OAUTH_CREDENTIALS']['twitter']['secret']
 )
 
+gg_oauth = oauth.remote_app('google',
+                          base_url='https://www.google.com/accounts/',
+                          authorize_url='https://accounts.google.com/o/oauth2/auth',
+                          request_token_url=None,
+                          request_token_params={'scope': 'https://www.googleapis.com/auth/userinfo.email'},
+                          access_token_url='https://accounts.google.com/o/oauth2/token',
+                          access_token_method='POST',
+ #                         access_token_params={'grant_type': 'authorization_code'},
+                          consumer_key=app.config['OAUTH_CREDENTIALS']['google']['id'],
+                          consumer_secret=app.config['OAUTH_CREDENTIALS']['google']['secret'])
+
 @fb_oauth.tokengetter
 def get_facebook_token():
     return session.get('facebook_token')
@@ -38,6 +50,10 @@ def get_facebook_token():
 @tw_oauth.tokengetter
 def get_twitter_token(token=None):
     return session.get('twitter_token')
+
+@gg_oauth.tokengetter
+def get_access_token():
+    return session.get('google_token')
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
@@ -80,7 +96,7 @@ def before_request():
 @app.route('/login')
 def login():
     if current_user.is_authenticated:
-        flash('You\'re already logged in, silly!')
+        flash('You\'re already logged in.')
         return redirect(url_for('index'))
     else:
         return render_template('login.html',
@@ -90,7 +106,7 @@ def login():
 def oauth_authorize_fb():
     if not current_user.is_anonymous:
         return redirect(url_for('index'))
-    return fb_oauth.authorize(callback='http://kanawi-dev.heroku.com:5000/callback/facebook')
+    return fb_oauth.authorize(callback='http://kanawi-dev.heroku.com:5000/callback/facebook', next=request.args.get('next') or request.referrer or None)
 
 @app.route('/callback/facebook')
 @fb_oauth.authorized_handler
@@ -139,14 +155,51 @@ def oauth_callback_tw(resp):
     validate_user(social_id, handle, email)
     return redirect(request.args.get('next') or url_for('index'))
 
-def validate_user(social_id, handle, email):
+@app.route('/authorize/google')
+def oauth_authorize_gg():
+    if not current_user.is_anonymous:
+        return redirect(url_for('index'))
+    callback=url_for('oauth_callback_gg', _external=True)
+    return gg_oauth.authorize(callback=callback)
+
+@app.route('/callback/google')
+@gg_oauth.authorized_handler
+def oauth_callback_gg(resp):
+    next_url = request.args.get('next') or url_for('index')
+    if resp is None:
+        flash('Looks like you said no.')
+        return redirect(next_url)
+    access_token = resp['access_token']
+    session['google_token'] = access_token, ''
+    from urllib2 import Request, urlopen, URLError
+ 
+    headers = {'Authorization': 'OAuth '+access_token}
+    req = Request('https://www.googleapis.com/oauth2/v1/userinfo',
+                  None, headers)
+    try:
+        res = urlopen(req)
+    except URLError, e:
+        if e.code == 401:
+            # Unauthorized - bad token
+            session.pop('access_token', None)
+            return redirect(url_for('login'))
+    data = loads(res.read())
+    handle = data['name']
+    social_id = '$google:' + data['id']
+    email = data['email']
+    pic_url = data['picture']
+    validate_user(social_id, handle, email, pic_url)
+    return redirect(request.args.get('next') or url_for('index'))
+
+
+def validate_user(social_id, handle, email, pic_url=''):
     if social_id is None:
         flash(choice(app.config['MSG']['error']))
         return redirect(request.args.get('next') or url_for('index'))
     user = User.query.filter_by(social_id=social_id).first()
     flash(choice(app.config['MSG']['hello']) % handle)
     if not user:
-        user = User(social_id=social_id, handle=handle, email=email)
+        user = User(social_id=social_id, handle=handle, email=email, pic_url=pic_url)
         db.session.add(user)
         db.session.commit()
         for ninny in (User.query.all()): #New users start out following everyone, and get auto-followed by existing users.

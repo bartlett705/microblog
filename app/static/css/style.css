@@ -1,0 +1,23 @@
+.avatar_thumb {
+    border-radius: 30px;
+    border: 1px solid #110022;
+    padding: 0px; 
+    width: 60px; 
+}
+.avatar_big {
+	border-radius: 10px;
+	border: 2px solid #110022;
+	padding: 0px;
+	width: 200px;
+}
+body {
+	background-color: #111111;
+	color: #00ff50;
+	font-family: 'Fira+Mono:400,700', Monospace;
+}
+h1 {
+	color : red;
+}
+a {
+	color: #80E000;
+}
