@@ -45,7 +45,7 @@ class User(UserMixin, db.Model):
 		return Post.query.join(followers, (followers.c.followed_id == Post.user_id)).filter(followers.c.follower_id == self.id).order_by(Post.timestamp.desc())
 	
 	def avatar(self, size):
-		if "$google" in self.social_id:
+		if self.pic_url != None:
 			return self.pic_url
 		else:
 			return 'http://www.gravatar.com/avatar/%s?d=mm&s=%d' % (md5(self.email.encode('utf-8')).hexdigest(), size)

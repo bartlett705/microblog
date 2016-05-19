@@ -19,7 +19,7 @@
      </td>
      <td>
           {% if g.user.is_authenticated %}
-          <a href="{{ url_for('user', handle=g.user.handle, page=1) }}"><img src="{{ g.user.avatar(32) }}" class="avatar_thumb"></a>
+          <a href="{{ url_for('user', handle=g.user.handle, page=1) }}"><img src="{{ g.user.avatar(60) }}" class="avatar_thumb"></a>
           <a href="{{ url_for('logout') }}">Logout</a>
         {% else %}
           <a href="{{ url_for('login') }}">Login</a>

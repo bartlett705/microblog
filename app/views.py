@@ -21,7 +21,7 @@ fb_oauth = oauth.remote_app('facebook',
         authorize_url='https://www.facebook.com/dialog/oauth',
         consumer_key=app.config['OAUTH_CREDENTIALS']['facebook']['id'],
         consumer_secret=app.config['OAUTH_CREDENTIALS']['facebook']['secret'],
-        request_token_params={'scope': 'email'})
+        request_token_params={'scope': 'email, public_profile'})
 
 tw_oauth = oauth.remote_app('twitter',
     base_url='https://api.twitter.com/1/',
@@ -118,7 +118,7 @@ def oauth_callback_fb(resp):
         flash('It looks like you said no.')
         return redirect(next_url)
     session['facebook_token'] = (resp['access_token'], '')
-    data = fb_oauth.get('/me?fields=name,email').data
+    data = fb_oauth.get('/me?fields=name,email,picture').data
     print data
     social_id = '$facebook:' + data['id']
     handle = data['name']
@@ -126,7 +126,11 @@ def oauth_callback_fb(resp):
         email = data['email']
     else:
         email = 'insufficient_permission'
-    validate_user(social_id, handle, email)
+    if 'picture' in data:
+        pic_url = data['picture']['data']['url']
+    else:
+        pic_url = None
+    validate_user(social_id, handle, email, pic_url)
     return redirect(request.args.get('next') or url_for('index'))
 
 @app.route('/authorize/twitter')
@@ -243,6 +247,8 @@ def edit():
     else:
         form.handle.data = g.user.handle
         form.about_me.data = g.user.about_me
+        form.email.data = g.user.email
+        form.pic_url.data = g.user.pic_url
         if form.handle.errors:
             flash(form.handle.errors[0])
     return render_template('edit.html', form=form, user=g.user)

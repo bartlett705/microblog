@@ -7,13 +7,24 @@
       {{form.hidden_tag()}}
       <table>
           <tr>
-              <td>Your handle:</td>
+              <td>Your handle (req'd):</td>
               <td>{{ form.handle(size=24) }}
               {% for error in form.errors.nickname %}
                 <br><span style="color: red;">[{{ error }}]</span>
               {% endfor %}
             </td>
           </tr>
+          <tr>
+          <td>Your email (req'd):</td>
+              <td>{{ form.email(size=24) }}
+              </td>
+              </tr>
+          <tr>
+            <td>Avatar URL - these should be square-ish. <br><span class="warning"> You WILL break your avatar with a bad URL.</span><br> Leave blank to use your <a href="http://gravatar.com/">Gravatar</a>.
+            </td>
+            <td>
+            {{ form.pic_url(size=32) }} </td>
+            </tr>
           <tr>
               <td>Spill the beans:</td>
               <td>{{ form.about_me(cols=32, rows=4) }}</td>

@@ -6,7 +6,9 @@ from app.models import User
 class EditForm(Form):
     handle = StringField('handle', validators=[DataRequired()])
     about_me = TextAreaField('about_me', validators=[Length(min=0, max=240)])
-
+    email = StringField('email', validators=[DataRequired()])
+    pic_url = StringField('pic_url', validators=[Length(min=0, max=160)])
+    
     def __init__(self, original_handle, *args, **kwargs):
     	Form.__init__(self, *args, **kwargs)
     	self.original_handle = original_handle
