@@ -1,5 +1,6 @@
 <table>
-      <tr valign="top">
-          <td><a href="{{ url_for('user', handle=post.author.handle, page=1) }}"><img src="{{ post.author.avatar(60) }}" class="avatar_thumb"></a></td><td><i><a href="{{ url_for('user', handle=post.author.handle, page=1) }}">{{ post.author.handle }}</a> says:</i><br>{{ post.body }}</td>
-      </tr>
+      <div class="row">
+          <div class="col-md-1"><a href="{{ url_for('user', handle=post.author.handle, page=1) }}"><img src="{{ post.author.avatar(60) }}" class="avatar_thumb"></a></div>
+          <div class="col-md-11"><i><a href="{{ url_for('user', handle=post.author.handle, page=1) }}">{{ post.author.handle }}</a> says:</i><br>{{ post.body }}</div>
+      </div><hr width=100%>
 </table>

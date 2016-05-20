@@ -1,21 +1,47 @@
 {% extends "start.html" %}
 {% block content %}
-	{% if user.handle %}
-    	<h1>Salutations, {{ user.handle }}!</h1>
-    {% else %}
-    	<h1>Howdy, stranger!</h1>
-    {% endif %}
+    <div class="container-fluid">
+    <div class="row">
+    <div class="col-md-12 text-center">
+        {% for error in form.post.errors %}
+        <span style="color:red;">[ {{ error }} !!! ]</span><br>
+        {% endfor %}</div></div>
+    <div class="row">
+    <div class="col-md-2 col-md-offset-1">
+        Type Away: </div></div>
+        <div class="row">
+        <div class="col-md-10 col-md-offset-1">
     <form action="" method="post" name="post">
+    <div class="input-group">
     	{{form.hidden_tag()}}
-    	<h4>Type Away: {{ form.post(size=60, maxlength=max_post_length) }}</h4>
-    	{% for error in form.post.errors %}
-    	<span style="color:red;">[ {{ error }} !!! ]</span><br>
-    	{% endfor %}
-    	<input type="submit" value="Commit">
+        {{ form.post(size=60, maxlength=max_post_length, placeholder=inspiration, class="form-control") }}
+
+        <span class="input-group-btn">
+    	<button class = "btn btn-primary" type="submit">Commit</button>
+        </span></div>
     </form>
+    </div></div></div>
+            <div class="row">
+        <div class="col-md-12 text-center">
+        <h1>
+~-=|<div class="flipped">&para;</div>&iexcl;&para;|=-~
+</h1>
+
+    </div></div>
+    <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-12 text-center">
     {% if posts.has_prev %}<a href="{{ url_for('index', page=posts.prev_num) }}">&lt;&lt; Futureways</a>{% else %}&lt;&lt; Futureways{% endif %} | 
 	{% if posts.has_next %}<a href="{{ url_for('index', page=posts.next_num) }}">Pastwise &gt;&gt;</a>{% else %}Pastwise &gt;&gt;{% endif %}
+        <span class="invisible">x</span> <!--Just to center the pager with the ascii art -->
+        </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1 well">
     {% for post in posts.items %}
      {% include 'post.html' %}
     {% endfor %}
+    </div>
+    </div>
+    </div>
 {% endblock %}

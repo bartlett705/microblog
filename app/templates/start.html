@@ -2,44 +2,59 @@
 <html>
   <head>
     <title>Welcome to Stance Industries</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
     <link href='https://fonts.googleapis.com/css?family=VT323|Fira+Mono:400,700' rel='stylesheet' type='text/css'>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/static/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body>
-     <div>
-     <table>
-     <tr>
-     <td>
-     Microblog: <a href="/index">Home</a>
-     </td>
-     <td width=90%>
-          {% if g.user.is_authenticated %}
-    <form style="display: inline;" action="{{ url_for('search') }}" method="post" name="search">{{ g.search_form.hidden_tag() }}{{ g.search_form.search(size=20) }}<input type="submit" value="Delve"></form>
-          {% endif %}
-     </td>
-     <td>
-          {% if g.user.is_authenticated %}
-          <a href="{{ url_for('user', handle=g.user.handle, page=1) }}"><img src="{{ g.user.avatar(60) }}" class="avatar_thumb"></a>
-          <a href="{{ url_for('logout') }}">Logout</a>
+  <nav class="navbar navbar-default">
+    <div class = "container-fluid">
+      <div class = "navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="nav-collapse" area-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        </button></div>
+        <div class="row"><div class="col-md-1">
+        <a class = "nav navbar-brand" href="/" style="padding-top: 22px; padding-left:10px">tw|bg|&micro;b</a>
+      </div>
+        <div class="collapse navbar-collapse" id="nav-collapse">
+        {% if g.user.is_authenticated %}
+<div class="col-md-6">
+    <form class="navbar-form navbar-left" action="{{ url_for('search') }}" method="post" name="search" style="padding-top: 5px"><div class="form-group">{{ g.search_form.hidden_tag() }}{{ g.search_form.search(size=20, placeholder="...?", class="form-control") }}
+</div>
+    <button type="submit" class="btn btn-primary">Delve</button></form></div>
+          <ul class="nav navbar-nav navbar-right">
+          <li><a href="{{ url_for('logout') }}" style="padding-top: 22px">Logout</a></li>
+          <li><a href="{{ url_for('user', handle=g.user.handle, page=1) }}"><img src="{{ g.user.avatar(60) }}" class="avatar_thumb"></a></li>
         {% else %}
-          <a href="{{ url_for('login') }}">Login</a>
+          <ul class="nav navbar-nav navbar-right">
+          <li>
+          <a href="{{ url_for('login') }}">Login</a></li>
         {% endif %}
-     </td>
-     <tr>
-     </table>
-     </div>
-     <hr>
+        </ul>
+        </div>
+        </div>
+        </nav>
+
      {% with messages = get_flashed_messages() %}
       {% if messages %}
-        <ul>
+
         {% for message in messages %}
-            <li>{{ message }} </li>
+        <div class="alert alert-info">
+        {{ message }}
+            <button type="button" class="close" data-dismiss="alert">&times;</button></div>
         {% endfor %}
-        </ul>
+
       {% endif %}
     {% endwith %}
-    <hr>
     {% block content %}{% endblock %}
-
-  <body>
-</html>
+</div>
+</div>
+  </body>
+  </html>

@@ -28,7 +28,7 @@ OAUTH_CREDENTIALS = {
 WHOOSH_BASE = os.path.join(basedir, 'search.db')
 
 # Knobby constants
-POSTS_PER_PAGE = 3
+POSTS_PER_PAGE = 15
 MAX_POST_LENGTH = 160
 MAX_SEARCH_RESULTS = 50
 
@@ -45,19 +45,31 @@ ADMINS = ['lanceka@gmail.com']
 MSG = {
 	'confirm_post': [
 	'Huh, really?  If you say so...',
-	'I never would have guessed.'
-	'That\'s one I won\'t forget anytime soon!'],
+	'I never would have guessed.',
+	'That\'s one I won\'t forget anytime soon!',
+	'Tell me more!'],
 	'error' : [
 	'Something Borked. Try elsewise.',
-	'Sorry, come again? I was texting.'
+	'Sorry, come again? I was texting.',
 	'Another Error. Sheesh, who programmed this thing?'],
 	'hello' : [
 	'Hey there, %s.',
+	'Welcome to nowhere, %s.',
 	'Oh hi, %s! Good to see you again.',
 	'Well, well, well...if it isn\'t %s.'],
 	'goodbye' : [
 	'Bye-Bye.',
 	'Tootles!',
 	'Adios, amiga.',
-	'See ya later!']
+	'See ya later!'],
+	'inspiration': [
+	'Take the path less traveled.',
+	'What about Bob?',
+	'Tell me a story.',
+	'Where\'s Waldo?',
+	'Give me a five-count.',
+	'The secret to creativity is knowing how to hide your sources.',
+	'yada, yada, yada',
+	'blah, blah, blah',
+	'Content goes *HERE*',]
 }

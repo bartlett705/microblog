@@ -68,7 +68,7 @@ def index(page=1):
         flash(choice(app.config['MSG']['confirm_post']))
         return redirect(url_for('index'))
     posts = g.user.followed_posts().paginate(page, app.config['POSTS_PER_PAGE'], False)
-    return render_template('index.html', title='Home', user=g.user, form=form, posts=posts, max_post_length=app.config['MAX_POST_LENGTH'])
+    return render_template('index.html', title='Home', user=g.user, form=form, posts=posts, max_post_length=app.config['MAX_POST_LENGTH'], inspiration=choice(app.config['MSG']['inspiration']))
 
 @app.route('/search', methods=['POST'])
 @login_required
@@ -240,6 +240,8 @@ def edit():
     if form.validate_on_submit():
         g.user.handle = form.handle.data
         g.user.about_me = form.about_me.data
+        g.user.email = form.email.data
+        g.user.pic_url = form.pic_url.data
         db.session.add(g.user)
         db.session.commit()
         flash(choice(app.config['MSG']['confirm_post']))
@@ -299,3 +301,6 @@ def not_found_error(error):
 def internal_error(error):
     db.session.rollback()
     return render_template('500.html', user=g.user), 500
+
+def get_inspiration():
+    return choice(app.config['MSG']['inspiration'])

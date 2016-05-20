@@ -3,7 +3,20 @@
 {% block content %}
   <h1>Your Query "{{ query }}"...</h1>
   <h4>...turned up these posts:</h4>
-  {% for post in results %}
-      {% include 'post.html' %}
-  {% endfor %}
+	<hr width=90%>
+    <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-12 text-center">
+    {% if results.has_prev %}<a href="{{ url_for('index', page=results.prev_num) }}">&lt;&lt; Futureways</a>{% else %}&lt;&lt; Futureways{% endif %} | 
+  {% if results.has_next %}<a href="{{ url_for('index', page=results.next_num) }}">Pastwise &gt;&gt;</a>{% else %}Pastwise &gt;&gt;{% endif %}
+        </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1 well">
+    {% for post in results %}
+     {% include 'post.html' %}
+    {% endfor %}
+    </div>
+    </div>
+    </div>
 {% endblock %}
