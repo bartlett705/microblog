@@ -1,0 +1,6 @@
+<div class="container-fluid">
+      <div class="row">
+          <div class="col-md-1 col-sm-1 col-xs-2"><a href="{{ url_for('user', handle=ninny.handle, page=1) }}"><img src="{{ ninny.avatar(60) }}" class="avatar_thumb"></a></div>
+          <div class="col-md-11"><i><a href="{{ url_for('user', handle=ninny.handle, page=1) }}">{{ ninny.handle }}</a> said <a href="#" name="time_stamp" style="color: #b0b0b0" data-toggle="tooltip" data-placement="top" title="{{ ninny.posts.first().timestamp.strftime('%Y-%m-%dT%H:%M:%S Z') }}"> {{ momentjs(ninny.posts.first().timestamp).fromNow() }}</a>::</i><br>{{ ninny.posts.first().body }}</div>
+      </div><hr width=100%>
+</div>

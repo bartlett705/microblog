@@ -1,0 +1,17 @@
+<script type='text/javascript'>
+    $(document).ready(function () {
+        timeFixer();
+    });
+function timeFixer(){
+	var time_tips = document.getElementsByName("time_stamp");
+	for(var i = 0; i < time_tips.length; i++){
+		var dummy = time_tips[i].getAttribute("title");
+		time_tips[i].setAttribute("title", moment(dummy).format("LLLL"));
+		console.log(dummy);
+		console.log(time_tips[i]);
+	}
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+}
+</script>

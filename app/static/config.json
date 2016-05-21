@@ -8,7 +8,7 @@
     "@gray-lighter": "lighten(@gray-base, 92.5%)",
     "@brand-primary": "darken(#ff5500, 6.5%)",
     "@brand-success": "#00b300",
-    "@brand-info": "#33ccff",
+    "@brand-info": "darken(#33ccff, 15%)",
     "@brand-warning": "#00cc00",
     "@brand-danger": "#00ff00",
     "@body-bg": "#1e0363",
@@ -256,8 +256,8 @@
     "@modal-inner-padding": "15px",
     "@modal-title-padding": "15px",
     "@modal-title-line-height": "@line-height-base",
-    "@modal-content-bg": "#fff",
-    "@modal-content-border-color": "rgba(0,0,0,.2)",
+    "@modal-content-bg": "@well-bg",
+    "@modal-content-border-color": "darken(#33ccff, 15%)",
     "@modal-content-fallback-border-color": "#999",
     "@modal-backdrop-bg": "#000",
     "@modal-backdrop-opacity": ".5",
@@ -266,7 +266,7 @@
     "@modal-lg": "900px",
     "@modal-md": "600px",
     "@modal-sm": "300px",
-    "@alert-padding": "15px",
+    "@alert-padding": "10px",
     "@alert-border-radius": "@border-radius-base",
     "@alert-link-font-weight": "bold",
     "@alert-success-bg": "@state-success-bg",
@@ -427,5 +427,5 @@
     "scrollspy.js",
     "transition.js"
   ],
-  "customizerUrl": "http://getbootstrap.com/customize/?id=87f18060a49e69bd710b11c08a1ee457"
+  "customizerUrl": "http://getbootstrap.com/customize/?id=47e39dfd8b802370d053e09c1c87a127"
 }

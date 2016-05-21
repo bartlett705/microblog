@@ -28,15 +28,9 @@ OAUTH_CREDENTIALS = {
 WHOOSH_BASE = os.path.join(basedir, 'search.db')
 
 # Knobby constants
-POSTS_PER_PAGE = 15
-MAX_POST_LENGTH = 160
+POSTS_PER_PAGE = 3
+MAX_POST_LENGTH = 240
 MAX_SEARCH_RESULTS = 50
-
-# mail server settings
-MAIL_SERVER = 'localhost'
-MAIL_PORT = 25
-MAIL_USERNAME = None
-MAIL_PASSWORD = None
 
 # administrator list
 ADMINS = ['lanceka@gmail.com']

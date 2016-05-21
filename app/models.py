@@ -18,7 +18,7 @@ class User(UserMixin, db.Model):
 	email = db.Column(db.String(64), index=True, unique=True)
 	social_id = db.Column(db.String(64), nullable=False, unique=True)
 	posts = db.relationship('Post', backref='author', lazy='dynamic') # backref creates an 'author' field in the post entries based on the linked user.id
-	about_me = db.Column(db.String(260))
+	about_me = db.Column(db.String(240))
 	last_seen = db.Column(db.DateTime)
 	pic_url = db.Column(db.String(160))
 	followed = db.relationship('User',
@@ -44,6 +44,10 @@ class User(UserMixin, db.Model):
 	def followed_posts(self):
 		return Post.query.join(followers, (followers.c.followed_id == Post.user_id)).filter(followers.c.follower_id == self.id).order_by(Post.timestamp.desc())
 	
+	# def get_followed_users(self):
+	# 	print self.followed.all()
+	# 	print self.followed.count()
+
 	def avatar(self, size):
 		if self.pic_url != "" and self.pic_url != None:
 			return self.pic_url

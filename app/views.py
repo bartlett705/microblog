@@ -3,7 +3,7 @@ from datetime import datetime
 from random import choice
 from json import loads
 from flask import render_template, flash, redirect, url_for, request, session, g
-from forms import EditForm, PostForm, SearchForm
+from forms import EditUserForm, PostForm, SearchForm, EditPostForm
 from app import app, db, lm
 from models import User, Post
 from flask_oauthlib.client import OAuth
@@ -228,15 +228,15 @@ def user(handle, page=1):
     if user == None:
         flash('No idea who %s is.' % handle)
         return redirect(url_for('index'))
-    posts = user.posts.paginate(page, app.config['POSTS_PER_PAGE'], False)
+    posts = user.posts.order_by(Post.timestamp.desc()).paginate(page, app.config['POSTS_PER_PAGE'], False)
     return render_template('user.html',
                            user=user,
                            posts=posts)
 
-@app.route('/edit', methods=['GET', 'POST'])
+@app.route('/edit_user', methods=['GET', 'POST'])
 @login_required
-def edit():
-    form = EditForm(g.user.handle)
+def edit_user():
+    form = EditUserForm(g.user.handle)
     if form.validate_on_submit():
         g.user.handle = form.handle.data
         g.user.about_me = form.about_me.data
@@ -253,7 +253,43 @@ def edit():
         form.pic_url.data = g.user.pic_url
         if form.handle.errors:
             flash(form.handle.errors[0])
-    return render_template('edit.html', form=form, user=g.user)
+    return render_template('edit_user.html', form=form, user=g.user)
+
+@app.route('/edit_post/<int:id>', methods=['GET', 'POST'])
+@login_required
+def edit_post(id):
+    form = EditPostForm()
+    post = Post.query.get(id)
+    if post is None:
+        flash("What? I know no post such as this.")
+        return redirect(url_for('index'))
+    if post.author.id != g.user.id:
+        flash('You cannot edit this post!')
+        return redirect(url_for('index'))
+    if form.validate_on_submit():
+        post.body = form.body.data
+        db.session.add(post)
+        db.session.commit()
+        flash('History revised.')
+        return redirect(url_for('index'))
+    else:
+        form.body.data = post.body
+    return render_template('edit_post.html', form=form, post=post)
+
+@app.route('/delete/<int:id>')
+@login_required
+def delete(id):
+    post = Post.query.get(id)
+    if post is None:
+        flash("What? I know no post such as this.")
+        return redirect(url_for('index'))
+    if post.author.id != g.user.id:
+        flash('You cannot delete this post!')
+        return redirect(url_for('index'))
+    db.session.delete(post)
+    db.session.commit()
+    flash('Probably better off this way.')
+    return redirect(url_for('index'))
 
 @app.route('/follow/<handle>')
 @login_required

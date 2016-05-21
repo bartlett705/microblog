@@ -1,6 +1,16 @@
-<table>
+<div class="container-fluid">
       <div class="row">
-          <div class="col-md-1"><a href="{{ url_for('user', handle=post.author.handle, page=1) }}"><img src="{{ post.author.avatar(60) }}" class="avatar_thumb"></a></div>
-          <div class="col-md-11"><i><a href="{{ url_for('user', handle=post.author.handle, page=1) }}">{{ post.author.handle }}</a> says:</i><br>{{ post.body }}</div>
-      </div><hr width=100%>
-</table>
+        	<div class="col-md-1 col-sm-1 col-xs-2">
+        	<a href="{{ url_for('user', handle=post.author.handle, page=1) }}"><img src="{{ post.author.avatar(60) }}" class="avatar_thumb"></a></div>
+        	<div class="col-md-10 col-sm-10 col-xs-9">
+        	<i><a href="{{ url_for('user', handle=post.author.handle, page=1) }}">{{ post.author.handle }}</a> said <a href="#" name="time_stamp" style="color: #b0b0b0" data-toggle="tooltip" data-placement="top" title="{{ post.timestamp.strftime('%Y-%m-%dT%H:%M:%S Z') }}"> {{ momentjs(post.timestamp).fromNow() }}</a>:</i><br>{{ post.body }}</div>
+      		<div class="col-md-1 col-sm-1 col-xs-1">
+      			{% if post.author.id == g.user.id %}
+					<div><a href="{{ url_for('delete', id=post.id) }}" class="post_utils"><kbd>Erase</kbd></a></div>
+					<div><a href="{{ url_for('edit_post', id=post.id) }}" class="post_utils"><kbd>Modify</kbd></a></div>
+				{% endif %}
+			</div>
+      </div>
+
+      <hr width=100%>
+</div>

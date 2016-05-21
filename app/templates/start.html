@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="/static/css/style.css">
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/moment.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body>
@@ -21,11 +22,11 @@
         <span class="icon-bar"></span>
         </button></div>
         <div class="row"><div class="col-md-1">
-        <a class = "nav navbar-brand" href="/" style="padding-top: 22px; padding-left:10px">tw|bg|&micro;b</a>
+        <span class="text-nowrap"><a class = "nav navbar-brand" href="/" style="padding-top: 22px; padding-left:10px">tw|bg|&micro;b</a></span>
       </div>
         <div class="collapse navbar-collapse" id="nav-collapse">
         {% if g.user.is_authenticated %}
-<div class="col-md-6">
+<div class="col-md-5">
     <form class="navbar-form navbar-left" action="{{ url_for('search') }}" method="post" name="search" style="padding-top: 5px"><div class="form-group">{{ g.search_form.hidden_tag() }}{{ g.search_form.search(size=20, placeholder="...?", class="form-control") }}
 </div>
     <button type="submit" class="btn btn-primary">Delve</button></form></div>

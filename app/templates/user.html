@@ -5,16 +5,25 @@
   <table>
       <tr valign="top">
           <td><img src="{{ user.avatar(128) }}" class="avatar_big"></td>
-          <td><font size=5>The ramblings of <strong>{{ user.handle }}</strong></font>
-          {% if user.last_seen %}<font size=3>, who was last seen on {{ user.last_seen }}, are seen by {{ user.followers.count() }} hapless souls and/or bots.</font>{% endif %}
-          <div class="well">
-          {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}<br></div>
-          {% if user.id == g.user.id %}<a href="{{ url_for('edit') }}">Fix this stuff</a>
-          {% elif g.user.is_following(user) %}
-            <a href="{{ url_for('unfollow', handle=user.handle) }}" class="btn btn-info">Unfollow</a>
-          {% else %}
-			<a href="{{ url_for('follow', handle=user.handle) }}" class="btn btn-info">Follow</a>
-          {% endif %}</td>
+          <td><font size=5>The ramblings of <strong>{{ user.handle }}</strong></font>,
+          {% if user.last_seen %}
+          <font size=3>who was last seen {{ momentjs(user.last_seen).calendar() }},
+          {% endif %}
+          are seen by <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#FollowersModal">{{ user.followers.count() }}</button> hapless souls and/or bots. In turn, they see <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#FollowedModal">{{ user.followed.count() }}</button> names on their feed. You can: </font>
+          {% if user.id != g.user.id %}
+            {% if g.user.is_following(user) %}
+            <a href="{{ url_for('unfollow', handle=user.handle) }}" class="btn btn-sm btn-info">Unfollow</a>
+            {% else %}
+            <a href="{{ url_for('follow', handle=user.handle) }}" class="btn btn-sm btn-info">Follow</a>
+            {% endif %}
+          {% endif %}
+          {% if user.about_me %}
+            <div class="well">
+              <p>{{ user.about_me }}</p>
+          <br>
+          </div>
+          {% endif %}
+          {% if user.id == g.user.id %}<a href="{{ url_for('edit_user') }}">Fix this stuff</a>{% endif %}</td>
       </tr>
   </table>
 
@@ -22,8 +31,8 @@
     <div class="container-fluid">
         <div class="row">
         <div class="col-md-12 text-center">
-    {% if posts.has_prev %}<a href="{{ url_for('index', page=posts.prev_num) }}">&lt;&lt; Futureways</a>{% else %}&lt;&lt; Futureways{% endif %} | 
-  {% if posts.has_next %}<a href="{{ url_for('index', page=posts.next_num) }}">Pastwise &gt;&gt;</a>{% else %}Pastwise &gt;&gt;{% endif %}
+    {% if posts.has_prev %}<a href="{{ url_for('user', handle=user.handle, page=posts.prev_num) }}">&lt;&lt; Futureways</a>{% else %}&lt;&lt; Futureways{% endif %} | 
+    {% if posts.has_next %}<a href="{{ url_for('user', handle=user.handle, page=posts.next_num) }}">Pastwise &gt;&gt;</a>{% else %}Pastwise &gt;&gt;{% endif %}
         </div>
         </div>
         <div class="row">
@@ -34,4 +43,40 @@
     </div>
     </div>
     </div>
+<!--     Modals Follow -->
+<div class="modal fade" id="FollowersModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="FollowersModalLabel">{{ user.handle }}'s Followers</h4>
+        </div>
+        <div class="modal-body">
+          {% for ninny in user.followers.all() %}
+            {% include 'user_banner.html' %}
+          {% endfor %}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="FollowedModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="FollowedModalLabel">{{ user.handle }} is following:</h4>
+        </div>
+        <div class="modal-body">
+          {% for ninny in user.followed.all() %}
+            {% include 'user_banner.html' %}
+          {% endfor %}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% include 'time_fixer.html' %}
 {% endblock %}
