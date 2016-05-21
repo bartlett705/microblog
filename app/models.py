@@ -44,10 +44,6 @@ class User(UserMixin, db.Model):
 	def followed_posts(self):
 		return Post.query.join(followers, (followers.c.followed_id == Post.user_id)).filter(followers.c.follower_id == self.id).order_by(Post.timestamp.desc())
 	
-	# def get_followed_users(self):
-	# 	print self.followed.all()
-	# 	print self.followed.count()
-
 	def avatar(self, size):
 		if self.pic_url != "" and self.pic_url != None:
 			return self.pic_url
