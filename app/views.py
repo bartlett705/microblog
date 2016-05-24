@@ -8,6 +8,7 @@ from app import app, db, lm
 from models import User, Post
 from flask_oauthlib.client import OAuth
 from flask.ext.login import login_user, logout_user, current_user, login_required
+from flask.ext.misaka import markdown
 
 @lm.user_loader
 def load_user(id):
@@ -119,7 +120,6 @@ def oauth_callback_fb(resp):
         return redirect(next_url)
     session['facebook_token'] = (resp['access_token'], '')
     data = fb_oauth.get('/me?fields=name,email,picture').data
-    print data
     social_id = '$facebook:' + data['id']
     handle = data['name']
     if 'email' in data:
@@ -131,7 +131,7 @@ def oauth_callback_fb(resp):
     else:
         pic_url = None
     validate_user(social_id, handle, email, pic_url)
-    return redirect(request.args.get('next') or url_for('index'))
+    return redirect(url_for('index'))
 
 @app.route('/authorize/twitter')
 def oauth_authorize_tw():
@@ -152,12 +152,11 @@ def oauth_callback_tw(resp):
         resp['oauth_token'],
         resp['oauth_token_secret']
     )
-    print resp
     handle = resp['screen_name']
     social_id = '$twitter:' + resp['user_id']
     email = 'twitter user'
     validate_user(social_id, handle, email)
-    return redirect(request.args.get('next') or url_for('index'))
+    return redirect(url_for('index'))
 
 @app.route('/authorize/google')
 def oauth_authorize_gg():
@@ -193,7 +192,7 @@ def oauth_callback_gg(resp):
     email = data['email']
     pic_url = data['picture']
     validate_user(social_id, handle, email, pic_url)
-    return redirect(request.args.get('next') or url_for('index'))
+    return redirect(url_for('index'))
 
 
 def validate_user(social_id, handle, email, pic_url=''):

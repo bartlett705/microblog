@@ -170,3 +170,92 @@
 2016-05-21 00:42:46,793 INFO: microblog startup [in /home/hank/code/flask/microblog/app/__init__.py:34]
 2016-05-21 00:44:18,521 INFO: microblog startup [in /home/hank/code/flask/microblog/app/__init__.py:34]
 2016-05-21 00:44:38,263 INFO: microblog startup [in /home/hank/code/flask/microblog/app/__init__.py:34]
+2016-05-23 22:51:36,538 INFO: microblog startup [in /home/hank/code/flask/microblog/app/__init__.py:34]
+2016-05-23 22:51:55,901 ERROR: Exception on / [GET] [in /home/hank/code/flask/microblog/flask/local/lib/python2.7/site-packages/flask/app.py:1423]
+Traceback (most recent call last):
+  File "/home/hank/code/flask/microblog/flask/local/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/hank/code/flask/microblog/flask/local/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/hank/code/flask/microblog/flask/local/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/hank/code/flask/microblog/flask/local/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/hank/code/flask/microblog/flask/local/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/hank/code/flask/microblog/flask/local/lib/python2.7/site-packages/flask_login.py", line 792, in decorated_view
+    return func(*args, **kwargs)
+  File "/home/hank/code/flask/microblog/app/views.py", line 72, in index
+    return render_template('index.html', title='Home', user=g.user, form=form, posts=posts, max_post_length=app.config['MAX_POST_LENGTH'], inspiration=choice(app.config['MSG']['inspiration']))
+  File "/home/hank/code/flask/microblog/flask/local/lib/python2.7/site-packages/flask/templating.py", line 128, in render_template
+    context, ctx.app)
+  File "/home/hank/code/flask/microblog/flask/local/lib/python2.7/site-packages/flask/templating.py", line 110, in _render
+    rv = template.render(context)
+  File "/home/hank/code/flask/microblog/flask/local/lib/python2.7/site-packages/jinja2/environment.py", line 989, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "/home/hank/code/flask/microblog/flask/local/lib/python2.7/site-packages/jinja2/environment.py", line 754, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/hank/code/flask/microblog/app/templates/post.html", line 6, in template
+    <i><a href="{{ url_for('user', handle=post.author.handle, page=1) }}">{{ post.author.handle }}</a> said <a href="#" name="time_stamp" style="color: #b0b0b0" data-toggle="tooltip" data-placement="top" title="{{ post.timestamp.strftime('%Y-%m-%dT%H:%M:%S Z') }}"> {{ momentjs(post.timestamp).fromNow() }}</a>:</i><br>{{ post.body|markdown }}</div>
+TemplateAssertionError: no filter named 'markdown'
+2016-05-23 22:52:15,823 ERROR: Exception on / [GET] [in /home/hank/code/flask/microblog/flask/local/lib/python2.7/site-packages/flask/app.py:1423]
+Traceback (most recent call last):
+  File "/home/hank/code/flask/microblog/flask/local/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/hank/code/flask/microblog/flask/local/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/hank/code/flask/microblog/flask/local/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/hank/code/flask/microblog/flask/local/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/hank/code/flask/microblog/flask/local/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/hank/code/flask/microblog/flask/local/lib/python2.7/site-packages/flask_login.py", line 792, in decorated_view
+    return func(*args, **kwargs)
+  File "/home/hank/code/flask/microblog/app/views.py", line 72, in index
+    return render_template('index.html', title='Home', user=g.user, form=form, posts=posts, max_post_length=app.config['MAX_POST_LENGTH'], inspiration=choice(app.config['MSG']['inspiration']))
+  File "/home/hank/code/flask/microblog/flask/local/lib/python2.7/site-packages/flask/templating.py", line 128, in render_template
+    context, ctx.app)
+  File "/home/hank/code/flask/microblog/flask/local/lib/python2.7/site-packages/flask/templating.py", line 110, in _render
+    rv = template.render(context)
+  File "/home/hank/code/flask/microblog/flask/local/lib/python2.7/site-packages/jinja2/environment.py", line 989, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "/home/hank/code/flask/microblog/flask/local/lib/python2.7/site-packages/jinja2/environment.py", line 754, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/hank/code/flask/microblog/app/templates/post.html", line 6, in template
+    <i><a href="{{ url_for('user', handle=post.author.handle, page=1) }}">{{ post.author.handle }}</a> said <a href="#" name="time_stamp" style="color: #b0b0b0" data-toggle="tooltip" data-placement="top" title="{{ post.timestamp.strftime('%Y-%m-%dT%H:%M:%S Z') }}"> {{ momentjs(post.timestamp).fromNow() }}</a>:</i><br>{{ post.body|markdown }}</div>
+TemplateAssertionError: no filter named 'markdown'
+2016-05-23 22:52:30,241 ERROR: Exception on /index [GET] [in /home/hank/code/flask/microblog/flask/local/lib/python2.7/site-packages/flask/app.py:1423]
+Traceback (most recent call last):
+  File "/home/hank/code/flask/microblog/flask/local/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/hank/code/flask/microblog/flask/local/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/hank/code/flask/microblog/flask/local/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/hank/code/flask/microblog/flask/local/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/hank/code/flask/microblog/flask/local/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/hank/code/flask/microblog/flask/local/lib/python2.7/site-packages/flask_login.py", line 792, in decorated_view
+    return func(*args, **kwargs)
+  File "/home/hank/code/flask/microblog/app/views.py", line 72, in index
+    return render_template('index.html', title='Home', user=g.user, form=form, posts=posts, max_post_length=app.config['MAX_POST_LENGTH'], inspiration=choice(app.config['MSG']['inspiration']))
+  File "/home/hank/code/flask/microblog/flask/local/lib/python2.7/site-packages/flask/templating.py", line 128, in render_template
+    context, ctx.app)
+  File "/home/hank/code/flask/microblog/flask/local/lib/python2.7/site-packages/flask/templating.py", line 110, in _render
+    rv = template.render(context)
+  File "/home/hank/code/flask/microblog/flask/local/lib/python2.7/site-packages/jinja2/environment.py", line 989, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "/home/hank/code/flask/microblog/flask/local/lib/python2.7/site-packages/jinja2/environment.py", line 754, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/hank/code/flask/microblog/app/templates/post.html", line 6, in template
+    <i><a href="{{ url_for('user', handle=post.author.handle, page=1) }}">{{ post.author.handle }}</a> said <a href="#" name="time_stamp" style="color: #b0b0b0" data-toggle="tooltip" data-placement="top" title="{{ post.timestamp.strftime('%Y-%m-%dT%H:%M:%S Z') }}"> {{ momentjs(post.timestamp).fromNow() }}</a>:</i><br>{{ post.body|markdown }}</div>
+TemplateAssertionError: no filter named 'markdown'
+2016-05-23 22:53:30,368 INFO: microblog startup [in /home/hank/code/flask/microblog/app/__init__.py:34]
+2016-05-23 22:53:30,768 INFO: microblog startup [in /home/hank/code/flask/microblog/app/__init__.py:34]
+2016-05-23 22:57:43,496 INFO: microblog startup [in /home/hank/code/flask/microblog/app/__init__.py:37]
+2016-05-23 22:57:43,887 INFO: microblog startup [in /home/hank/code/flask/microblog/app/__init__.py:37]
+2016-05-23 23:09:39,154 INFO: microblog startup [in /home/hank/code/flask/microblog/app/__init__.py:37]
+2016-05-23 23:12:49,457 INFO: microblog startup [in /home/hank/code/flask/microblog/app/__init__.py:37]
+2016-05-23 23:13:31,503 INFO: microblog startup [in /home/hank/code/flask/microblog/app/__init__.py:37]

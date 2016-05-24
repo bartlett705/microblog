@@ -2,6 +2,7 @@ from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import LoginManager
 from config import basedir #, ADMINS, MAIL_SERVER, MAIL_PORT, MAIL_USERNAME, MAIL_PASSWORD
+from flask.ext.misaka import Misaka
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -9,6 +10,8 @@ db = SQLAlchemy(app)
 lm = LoginManager(app)
 lm.init_app(app)
 lm.login_view = 'login'
+misaka = Misaka(html=False, smartypants=True, highlight=True, no_intra_emphasis=True, strikethrough=True, superscript=True)
+misaka.init_app(app)
 
 # if not app.debug: # to run a debug server: python -m smtpd -n -c DebuggingServer localhost:25
 #     import logging
