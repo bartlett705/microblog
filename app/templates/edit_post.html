@@ -7,8 +7,9 @@
       {{form.hidden_tag()}}
       <div class="container-fluid">
           <div class="row">
-              <div class="col-md-4 text-right">Your original words:</div>
-              <div class="col-md-6">{{ form.body(cols=32, rows=4, class="form-control") }}
+              <div class="col-md-4 text-right">Your original words:<br>
+<span id="char-count"></div>
+              <div class="col-md-6">{{ form.body(maxlength=max_post_length, cols=32, rows=4, class="form-control", id="post-area") }}
             </div>
           </div>
           <div class="row">
@@ -17,4 +18,5 @@
           </div>
       </div>
   </form>
+{% include 'counter.html' %}
 {% endblock %}

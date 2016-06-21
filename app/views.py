@@ -273,7 +273,7 @@ def edit_post(id):
         return redirect(url_for('index'))
     else:
         form.body.data = post.body
-    return render_template('edit_post.html', form=form, post=post)
+    return render_template('edit_post.html', form=form, post=post, max_post_length=app.config['MAX_POST_LENGTH'])
 
 @app.route('/delete/<int:id>')
 @login_required

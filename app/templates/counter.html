@@ -1,0 +1,21 @@
+<script>
+$(document).ready(function() {
+    var text_max = {{ max_post_length }};
+
+    $('#post-area').keyup(function() {
+
+        var text_length = $('#post-area').val().length;
+        var text_remaining = text_max - text_length;
+    if (text_remaining < 100) {
+        $('#char-count').html('[' + text_remaining + ' chars left]');
+}
+    if (text_remaining < 25) {
+        $('#char-count').html('<font color="red">[' + text_remaining + ' chars left]</font>');
+}
+    if (text_remaining >= 100) {
+	$('#char-count').html(' ');
+}
+
+    });
+});
+</script>

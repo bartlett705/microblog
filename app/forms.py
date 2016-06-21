@@ -26,10 +26,10 @@ class EditUserForm(Form):
         return True
 
 class PostForm(Form):
-    post = StringField('post', validators=[Length(min=0, max=MAX_POST_LENGTH)])
+    post = TextAreaField('post', validators=[Length(min=0, max=MAX_POST_LENGTH)])
 
 class EditPostForm(Form):
-    body = StringField('body', validators=[Length(min=0, max=MAX_POST_LENGTH)])
+    body = TextAreaField('body', validators=[Length(min=0, max=MAX_POST_LENGTH)])
 
 class SearchForm(Form):
     search = StringField('search', validators=[DataRequired()])

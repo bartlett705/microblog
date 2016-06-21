@@ -21,9 +21,17 @@ h1 {
 .nav {
 	font-weight: 700;
 }
-a{
+a {
 	font-weight: 700;
 }
+.attribution-link {
+    color: #775555;
+
+}
+.attribution-link a{
+    color: #BB2222;
+}
+
 .flipped {
 -moz-transform: scale(-1, 1);
 -webkit-transform: scale(-1, 1);

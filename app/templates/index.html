@@ -13,16 +13,16 @@
 
     </div></div>
     <div class="row">
-    <div class="col-md-2 col-md-offset-1">
-        Type Away: </div></div>
+    <div class="col-md-6 col-md-offset-1">
+        Type Away <span id="char-count"></span> : </div></div>
         <div class="row">
         <div class="col-md-10 col-md-offset-1">
     <form action="" method="post" name="post">
     <div class="input-group">
-    	{{form.hidden_tag()}}
-        {{ form.post(size=60, maxlength=max_post_length, placeholder=inspiration, class="form-control") }}
+    	{{ form.hidden_tag() }}
+        {{ form.post(size=60, maxlength=max_post_length, placeholder=inspiration, class="form-control", id="post-area") }}
 
-        <span class="input-group-btn">
+	<span class="input-group-btn">
     	<button class = "btn btn-primary" type="submit">Commit</button>
         </span></div>
     </form>
@@ -45,4 +45,5 @@
     </div>
     </div>
  {% include 'time_fixer.html' %}
+ {% include 'counter.html' %}
 {% endblock %}

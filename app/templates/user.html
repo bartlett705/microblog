@@ -19,7 +19,7 @@
           {% endif %}
           {% if user.about_me %}
             <div class="well">
-              <p>{{ user.about_me }}</p>
+              <p>{{ user.about_me|markdown }}</p>
           <br>
           </div>
           {% endif %}
