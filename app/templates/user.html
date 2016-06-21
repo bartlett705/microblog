@@ -9,7 +9,7 @@
           {% if user.last_seen %}
           <font size=3>who was last seen {{ momentjs(user.last_seen).calendar() }},
           {% endif %}
-          are seen by <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#FollowersModal">{{ user.followers.count() }}</button> hapless souls and/or bots. In turn, they see <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#FollowedModal">{{ user.followed.count() }}</button> names on their feed. You can: </font>
+          are seen by <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#FollowersModal">{{ user.followers.count() }}</button> hapless souls and/or bots. In turn, they see <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#FollowedModal">{{ user.followed.count() }}</button> names on their feed.</font>
           {% if user.id != g.user.id %}
             {% if g.user.is_following(user) %}
             <a href="{{ url_for('unfollow', handle=user.handle) }}" class="btn btn-sm btn-info">Unfollow</a>

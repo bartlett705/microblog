@@ -259,3 +259,122 @@ TemplateAssertionError: no filter named 'markdown'
 2016-05-23 23:09:39,154 INFO: microblog startup [in /home/hank/code/flask/microblog/app/__init__.py:37]
 2016-05-23 23:12:49,457 INFO: microblog startup [in /home/hank/code/flask/microblog/app/__init__.py:37]
 2016-05-23 23:13:31,503 INFO: microblog startup [in /home/hank/code/flask/microblog/app/__init__.py:37]
+2016-05-24 03:23:06,905 INFO: microblog startup [in /var/www/microblog/app/__init__.py:37]
+2016-05-24 03:26:06,903 INFO: microblog startup [in /var/www/microblog/app/__init__.py:37]
+2016-05-24 03:28:49,128 INFO: microblog startup [in /var/www/microblog/app/__init__.py:37]
+2016-05-24 03:31:22,021 INFO: microblog startup [in /var/www/microblog/app/__init__.py:37]
+2016-05-24 03:31:22,335 INFO: microblog startup [in /var/www/microblog/app/__init__.py:37]
+2016-05-24 03:43:18,052 INFO: microblog startup [in /var/www/microblog/app/__init__.py:37]
+2016-05-24 03:43:18,477 INFO: microblog startup [in /var/www/microblog/app/__init__.py:37]
+2016-05-24 03:43:50,539 INFO: microblog startup [in /var/www/microblog/app/__init__.py:37]
+2016-05-24 03:44:23,949 ERROR: Exception on /callback/twitter [GET] [in /var/www/microblog/flask/local/lib/python2.7/site-packages/flask/app.py:1423]
+Traceback (most recent call last):
+  File "/var/www/microblog/flask/local/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/var/www/microblog/flask/local/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/var/www/microblog/flask/local/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/var/www/microblog/flask/local/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/var/www/microblog/flask/local/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/var/www/microblog/flask/local/lib/python2.7/site-packages/flask_oauthlib/client.py", line 697, in decorated
+    return f(*((data,) + args), **kwargs)
+  File "/var/www/microblog/app/views.py", line 158, in oauth_callback_tw
+    validate_user(social_id, handle, email)
+  File "/var/www/microblog/app/views.py", line 202, in validate_user
+    user = User.query.filter_by(social_id=social_id).first()
+  File "/var/www/microblog/flask/local/lib/python2.7/site-packages/sqlalchemy/orm/query.py", line 2341, in first
+    ret = list(self[0:1])
+  File "/var/www/microblog/flask/local/lib/python2.7/site-packages/sqlalchemy/orm/query.py", line 2208, in __getitem__
+    return list(res)
+  File "/var/www/microblog/flask/local/lib/python2.7/site-packages/sqlalchemy/orm/query.py", line 2412, in __iter__
+    return self._execute_and_instances(context)
+  File "/var/www/microblog/flask/local/lib/python2.7/site-packages/sqlalchemy/orm/query.py", line 2427, in _execute_and_instances
+    result = conn.execute(querycontext.statement, self._params)
+  File "/var/www/microblog/flask/local/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 729, in execute
+    return meth(self, multiparams, params)
+  File "/var/www/microblog/flask/local/lib/python2.7/site-packages/sqlalchemy/sql/elements.py", line 321, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "/var/www/microblog/flask/local/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 826, in _execute_clauseelement
+    compiled_sql, distilled_params
+  File "/var/www/microblog/flask/local/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 958, in _execute_context
+    context)
+  File "/var/www/microblog/flask/local/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1160, in _handle_dbapi_exception
+    exc_info
+  File "/var/www/microblog/flask/local/lib/python2.7/site-packages/sqlalchemy/util/compat.py", line 199, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb)
+  File "/var/www/microblog/flask/local/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 951, in _execute_context
+    context)
+  File "/var/www/microblog/flask/local/lib/python2.7/site-packages/sqlalchemy/engine/default.py", line 436, in do_execute
+    cursor.execute(statement, parameters)
+OperationalError: (OperationalError) no such table: user u'SELECT user.id AS user_id, user.handle AS user_handle, user.email AS user_email, user.social_id AS user_social_id, user.about_me AS user_about_me, user.last_seen AS user_last_seen, user.pic_url AS user_pic_url \nFROM user \nWHERE user.social_id = ?\n LIMIT ? OFFSET ?' (u'$twitter:26400555', 1, 0)
+2016-05-24 03:55:07,698 INFO: microblog startup [in /var/www/microblog/app/__init__.py:37]
+2016-05-24 03:55:08,053 INFO: microblog startup [in /var/www/microblog/app/__init__.py:37]
+2016-05-24 05:03:47,520 INFO: microblog startup [in /var/www/microblog/app/__init__.py:37]
+2016-05-24 05:06:18,479 INFO: microblog startup [in /var/www/microblog/app/__init__.py:37]
+2016-05-24 18:22:06,211 INFO: microblog startup [in /var/www/microblog/app/__init__.py:37]
+2016-05-24 18:32:36,773 INFO: microblog startup [in /var/www/microblog/app/__init__.py:37]
+2016-05-31 22:23:23,400 INFO: microblog startup [in /var/www/microblog/app/__init__.py:37]
+2016-05-31 22:41:56,342 INFO: microblog startup [in /var/www/microblog/app/__init__.py:37]
+2016-05-31 22:52:57,832 INFO: microblog startup [in /var/www/microblog/app/__init__.py:37]
+2016-05-31 22:53:04,292 INFO: microblog startup [in /var/www/microblog/app/__init__.py:37]
+2016-05-31 22:53:46,974 INFO: microblog startup [in /var/www/microblog/app/__init__.py:37]
+2016-05-31 22:54:16,273 INFO: microblog startup [in /var/www/microblog/app/__init__.py:37]
+2016-05-31 22:55:32,662 ERROR: Exception on /callback/twitter [GET] [in /var/www/microblog/flask/local/lib/python2.7/site-packages/flask/app.py:1423]
+Traceback (most recent call last):
+  File "/var/www/microblog/flask/local/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/var/www/microblog/flask/local/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/var/www/microblog/flask/local/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/var/www/microblog/flask/local/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/var/www/microblog/flask/local/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/var/www/microblog/flask/local/lib/python2.7/site-packages/flask_oauthlib/client.py", line 697, in decorated
+    return f(*((data,) + args), **kwargs)
+  File "/var/www/microblog/app/views.py", line 158, in oauth_callback_tw
+    validate_user(social_id, handle, email)
+  File "/var/www/microblog/app/views.py", line 202, in validate_user
+    user = User.query.filter_by(social_id=social_id).first()
+  File "/var/www/microblog/flask/local/lib/python2.7/site-packages/sqlalchemy/orm/query.py", line 2341, in first
+    ret = list(self[0:1])
+  File "/var/www/microblog/flask/local/lib/python2.7/site-packages/sqlalchemy/orm/query.py", line 2208, in __getitem__
+    return list(res)
+  File "/var/www/microblog/flask/local/lib/python2.7/site-packages/sqlalchemy/orm/query.py", line 2412, in __iter__
+    return self._execute_and_instances(context)
+  File "/var/www/microblog/flask/local/lib/python2.7/site-packages/sqlalchemy/orm/query.py", line 2427, in _execute_and_instances
+    result = conn.execute(querycontext.statement, self._params)
+  File "/var/www/microblog/flask/local/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 729, in execute
+    return meth(self, multiparams, params)
+  File "/var/www/microblog/flask/local/lib/python2.7/site-packages/sqlalchemy/sql/elements.py", line 321, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File "/var/www/microblog/flask/local/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 826, in _execute_clauseelement
+    compiled_sql, distilled_params
+  File "/var/www/microblog/flask/local/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 958, in _execute_context
+    context)
+  File "/var/www/microblog/flask/local/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1160, in _handle_dbapi_exception
+    exc_info
+  File "/var/www/microblog/flask/local/lib/python2.7/site-packages/sqlalchemy/util/compat.py", line 199, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb)
+  File "/var/www/microblog/flask/local/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 951, in _execute_context
+    context)
+  File "/var/www/microblog/flask/local/lib/python2.7/site-packages/sqlalchemy/engine/default.py", line 436, in do_execute
+    cursor.execute(statement, parameters)
+  File "/var/www/microblog/flask/local/lib/python2.7/site-packages/MySQLdb/cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "/var/www/microblog/flask/local/lib/python2.7/site-packages/MySQLdb/connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+ProgrammingError: (ProgrammingError) (1146, "Table 'apps.user' doesn't exist") 'SELECT user.id AS user_id, user.handle AS user_handle, user.email AS user_email, user.social_id AS user_social_id, user.about_me AS user_about_me, user.last_seen AS user_last_seen, user.pic_url AS user_pic_url \nFROM user \nWHERE user.social_id = %s \n LIMIT %s' ('$twitter:26400555', 1)
+2016-05-31 23:18:29,702 INFO: microblog startup [in /var/www/microblog/app/__init__.py:37]
+2016-06-01 00:10:30,530 INFO: microblog startup [in /var/www/microblog/app/__init__.py:37]
+2016-06-01 00:11:00,251 INFO: microblog startup [in /var/www/microblog/app/__init__.py:37]
+2016-06-01 00:18:00,701 INFO: microblog startup [in /var/www/microblog/app/__init__.py:37]
+2016-06-01 00:18:32,985 INFO: microblog startup [in /var/www/microblog/app/__init__.py:37]
+2016-06-01 00:21:12,725 INFO: microblog startup [in /var/www/microblog/app/__init__.py:37]
+2016-06-01 00:23:33,303 INFO: microblog startup [in /var/www/microblog/app/__init__.py:37]
+2016-06-01 00:26:21,281 INFO: microblog startup [in /var/www/microblog/app/__init__.py:37]
+2016-06-01 00:31:55,578 INFO: microblog startup [in /var/www/microblog/app/__init__.py:37]

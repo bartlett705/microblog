@@ -1,4 +1,4 @@
-#!/home/hank/code/flask/microblog/flask/bin/python
+#!/var/www/microblog/flask/bin/python
 
 # -*- coding: utf-8 -*-
 import re

@@ -3,8 +3,8 @@
 
 {% block content %}
   <h1>Credentials</h1>
-  <a href="/authorize/facebook">Facebook</a><br>
-  <a href="/authorize/twitter">Twitter</a><br>
-  <a href="/authorize/google">Google</a><br>
+  <a href="{{ url_for('oauth_authorize_fb') }}">Facebook</a><br>
+  <a href="{{ url_for('oauth_authorize_tw') }}">Twitter</a><br>
+  <a href="{{ url_for('oauth_authorize_gg') }}">Google</a><br>
 
 {% endblock %}

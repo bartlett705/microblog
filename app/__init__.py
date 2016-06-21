@@ -5,7 +5,7 @@ from config import basedir #, ADMINS, MAIL_SERVER, MAIL_PORT, MAIL_USERNAME, MAI
 from flask.ext.misaka import Misaka
 
 app = Flask(__name__)
-app.config.from_object('config')
+app.config.from_object('app.config')
 db = SQLAlchemy(app)
 lm = LoginManager(app)
 lm.init_app(app)
@@ -38,7 +38,8 @@ if not app.debug:
 
 from app import views, models
 
-
+if __name__ == "__main__":
+	app.run()
 
 
 

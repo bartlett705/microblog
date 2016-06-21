@@ -22,7 +22,7 @@
         <span class="icon-bar"></span>
         </button></div>
         <div class="row"><div class="col-md-1">
-        <span class="text-nowrap"><a class = "nav navbar-brand" href="/" style="padding-top: 22px; padding-left:10px">tw|bg|&micro;b</a></span>
+        <span class="text-nowrap"><a class = "nav navbar-brand" href="{{ url_for('index') }}" style="padding-top: 22px; padding-left:10px">tw|bg|&micro;b</a></span>
       </div>
         <div class="collapse navbar-collapse" id="nav-collapse">
         {% if g.user.is_authenticated %}

@@ -1,4 +1,4 @@
-#!/home/hank/code/flask/microblog/flask/bin/python
+#!/var/www/microblog/flask/bin/python
 
 # Copyright (C) 2008 Andi Albrecht, albrecht.andi@gmail.com
 #
@@ -77,7 +77,7 @@ def main():
         data = sys.stdin.read()
     else:
         try:
-            data = ''.join(open(args[0]).readlines())
+            data = '\n'.join(open(args[0]).readlines())
         except OSError:
             err = sys.exc_info()[1]  # Python 2.5 compatibility
             _error('Failed to read %s: %s' % (args[0], err), exit_=1)
