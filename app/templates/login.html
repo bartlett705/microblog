@@ -3,8 +3,10 @@
 
 {% block content %}
   <h1>Credentials</h1>
-  <a href="{{ url_for('oauth_authorize_fb') }}">Facebook</a><br>
-  <a href="{{ url_for('oauth_authorize_tw') }}">Twitter</a><br>
-  <a href="{{ url_for('oauth_authorize_gg') }}">Google</a><br>
-
+<div class="text-center">
+  Click a link below to log in using a social ID.<br><br>
+  <a href="{{ url_for('oauth_authorize_fb') }}">Facebook</a> |
+  <a href="{{ url_for('oauth_authorize_tw') }}">Twitter</a> |
+  <a href="{{ url_for('oauth_authorize_gg') }}">Google</a><br><br><hr width=80%>
+</div>
 {% endblock %}

@@ -211,6 +211,7 @@ def validate_user(social_id, handle, email, pic_url=''):
             db.session.add(ninny)
             db.session.commit()
         flash('Welcome to the party!')
+        app.logger.info(handle, 'logged in as ', social_id)
     login_user(user, True)
 
 
@@ -244,6 +245,7 @@ def edit_user():
         db.session.add(g.user)
         db.session.commit()
         flash(choice(app.config['MSG']['confirm_post']))
+        app.logger.info(g.user.handle, ' changed something.')
         return redirect(url_for('user', handle=g.user.handle, page=1))
     else:
         form.handle.data = g.user.handle
@@ -266,10 +268,12 @@ def edit_post(id):
         flash('You cannot edit this post!')
         return redirect(url_for('index'))
     if form.validate_on_submit():
+        app.logger.info(g.user.handle, 'pre-edited post ', id, post.body)
         post.body = form.body.data
         db.session.add(post)
         db.session.commit()
         flash('History revised.')
+        app.logger.info(g.user.handle, 'edited post ', id, post.body)
         return redirect(url_for('index'))
     else:
         form.body.data = post.body
@@ -288,6 +292,7 @@ def delete(id):
     db.session.delete(post)
     db.session.commit()
     flash('Probably better off this way.')
+    app.logger.info(g.user.handle, 'deleted post ', post.body)
     return redirect(url_for('index'))
 
 @app.route('/follow/<handle>')

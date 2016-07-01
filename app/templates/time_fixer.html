@@ -7,8 +7,6 @@ function timeFixer(){
 	for(var i = 0; i < time_tips.length; i++){
 		var dummy = time_tips[i].getAttribute("title");
 		time_tips[i].setAttribute("title", moment(dummy).format("LLLL"));
-		console.log(dummy);
-		console.log(time_tips[i]);
 	}
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()

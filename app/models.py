@@ -14,8 +14,8 @@ followers = db.Table('followers',
 class User(UserMixin, db.Model):
 	__tablename__ = 'user'
 	id = db.Column(db.Integer, primary_key=True)
-	handle = db.Column(db.String(64), nullable=False, index=True, unique=True)
-	email = db.Column(db.String(64), index=True, unique=True)
+	handle = db.Column(db.String(64), nullable=False, index=True)
+	email = db.Column(db.String(64), index=True)
 	social_id = db.Column(db.String(64), nullable=False, unique=True)
 	posts = db.relationship('Post', backref='author', lazy='dynamic') # backref creates an 'author' field in the post entries based on the linked user.id
 	about_me = db.Column(db.String(240))

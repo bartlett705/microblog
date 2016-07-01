@@ -3,6 +3,7 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import LoginManager
 from config import basedir #, ADMINS, MAIL_SERVER, MAIL_PORT, MAIL_USERNAME, MAIL_PASSWORD
 from flask.ext.misaka import Misaka
+#from flask_emoji import Emoji
 
 app = Flask(__name__)
 app.config.from_object('app.config')
@@ -10,8 +11,9 @@ db = SQLAlchemy(app)
 lm = LoginManager(app)
 lm.init_app(app)
 lm.login_view = 'login'
-misaka = Misaka(html=False, smartypants=True, highlight=True, no_intra_emphasis=True, strikethrough=True, superscript=True)
+misaka = Misaka(html=True, smartypants=True, highlight=True, no_intra_emphasis=True, strikethrough=True, superscript=True)
 misaka.init_app(app)
+#emoji = Emoji(app)
 
 # if not app.debug: # to run a debug server: python -m smtpd -n -c DebuggingServer localhost:25
 #     import logging
@@ -26,15 +28,15 @@ misaka.init_app(app)
 from .momentjs import momentjs
 app.jinja_env.globals['momentjs'] = momentjs
 
-if not app.debug:
-    import logging
-    from logging.handlers import RotatingFileHandler
-    file_handler = RotatingFileHandler('tmp/microblog.log', 'a', 1 * 1024 * 1024, 10)
-    file_handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'))
-    app.logger.setLevel(logging.INFO)
-    file_handler.setLevel(logging.INFO)
-    app.logger.addHandler(file_handler)
-    app.logger.info('microblog startup')
+import logging
+from logging.handlers import RotatingFileHandler
+logger = logging.getLogger('microblog')
+file_handler = RotatingFileHandler('tmp/microblog.log', 'a', 1 * 1024 * 1024, 10)
+file_handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)s: [in %(pathname)s:%(lineno)d] %(message)s'))
+logger.setLevel(logging.INFO)
+file_handler.setLevel(logging.INFO)
+logger.addHandler(file_handler)
+logger.info('microblog startup')
 
 from app import views, models
 

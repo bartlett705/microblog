@@ -1,3 +1,5 @@
+*.seg
+*.toc
 *.pyc
 flask/
 config.py
